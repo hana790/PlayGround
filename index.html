@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#101524" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <title>Mythbound — Wilds of Aether</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Mythbound home"><span class="brand-mark">✦</span><span>MYTH<span class="brand-light">BOUND</span></span></a>
+      <div class="run-info"><span class="chapter-tag"><i></i> THE VERDANT REACH</span><span class="floor-count">FLOOR <b id="floor">01</b><span class="floor-total"> / 08</span></span></div>
+      <div class="top-actions"><button class="icon-btn" id="deckBtn" aria-label="View deck" title="View deck">▤ <span id="deckCount">10</span></button><button class="icon-btn help-btn" id="helpBtn" aria-label="How to play">?</button></div>
+    </header>
+
+    <section class="main-layout">
+      <aside class="side-rail">
+        <div class="player-card">
+          <div class="avatar"><span>🧙🏻‍♀️</span><i class="avatar-spark">✦</i></div>
+          <div class="player-name">AURI <span>THE WAYFARER</span></div>
+          <div class="stat-row"><span>♥ VITALITY</span><b id="hpText">72 / 72</b></div>
+          <div class="meter hp-meter"><span id="hpBar"></span></div>
+          <div class="stat-row xp-row"><span>✦ FOCUS</span><b id="focusText">3 / 3</b></div>
+          <div class="meter focus-meter"><span id="focusBar"></span></div>
+          <div class="side-divider"></div>
+          <div class="mini-stat"><span>◈ SHARDS</span><b id="goldText">42</b></div>
+          <div class="mini-stat"><span>◉ CAPTURE ORBS</span><b id="orbText">1</b></div>
+          <div class="mini-stat"><span>♧ WILDKIN</span><b id="creatureCount">0</b></div>
+        </div>
+        <div class="run-card"><div class="run-heading">YOUR EXPEDITION <span>↗</span></div><div class="route-track"><div class="route-line"></div><div class="route-step active"><i>⚔</i><span>Wild encounter</span><b>NOW</b></div><div class="route-step"><i>◇</i><span>Choose a path</span></div><div class="route-step"><i>⌂</i><span>Resting grove</span></div><div class="route-step"><i>✹</i><span>Guardian</span></div></div></div>
+        <div class="tip-card"><span>✧ FIELD NOTE</span><p>Weaken a wildkin below <b>35%</b> to make it easier to catch.</p></div>
+      </aside>
+
+      <section class="arena-column" aria-label="Battle arena">
+        <div class="battle-head"><div><div class="eyebrow" id="phaseLabel">WILD ENCOUNTER <span>•</span> FLOOR 01</div><h1 id="battleTitle">A strange rustle…</h1></div><div class="round-pill"><span class="round-dot"></span> ROUND <b id="roundNum">1</b></div></div>
+        <div class="scene-wrap" id="sceneWrap">
+          <canvas id="scene" aria-label="A 3D-inspired wild battle scene"></canvas>
+          <div class="scene-vignette"></div>
+          <div class="scene-topline"><span class="scene-coord">MISTWOOD CLEARING <i>·</i> 04:32 PM</span><span class="weather"><span>☁</span> DUSK MIST</span></div>
+          <div class="creature-info" id="enemyInfo">
+            <div class="enemy-title"><span id="enemyName">Mossling</span><span class="type-pill" id="enemyType">MOSS / WILD</span></div>
+            <div class="enemy-health"><div class="enemy-health-track"><span id="enemyHpBar"></span></div><b id="enemyHpText">38 / 38</b></div>
+            <div class="intent-row" id="intentRow"><span class="intent-icon" id="intentIcon">⚔</span><span id="intentText">Preparing to strike</span><b id="intentValue">8</b></div>
+          </div>
+          <div class="scene-caption"><span class="caption-orb">✦</span><span id="sceneCaption">A wild Mossling blocks your path.</span></div>
+          <div class="fx-layer" id="fxLayer"></div>
+        </div>
+        <div class="combat-controls">
+          <div class="combat-state"><span class="state-gem"></span><span id="combatMessage">Your turn · play cards to shape the fight</span></div>
+          <button class="catch-btn" id="catchBtn"><span>◉</span><span>THROW ORB</span><kbd>1</kbd></button>
+          <button class="end-turn-btn" id="endTurnBtn"><span>END TURN</span><b>↗</b></button>
+        </div>
+        <div class="hand-header"><div><span class="hand-title">YOUR HAND</span><span class="hand-subtitle" id="handSubtitle">Choose your moves</span></div><div class="energy-wrap"><span>✦</span><div id="energyDots"></div><b id="energyText">3 / 3</b></div></div>
+        <div class="hand" id="hand" aria-label="Cards in your hand"></div>
+        <div class="bottom-meta"><span>✧ CARDS LEFT IN DRAW PILE <b id="drawCount">5</b></span><button id="discardBtn">DISCARD <b id="discardCount">0</b></button><button id="logBtn">BATTLE LOG <span>⌄</span></button></div>
+        <div class="battle-log" id="battleLog"></div>
+      </section>
+    </section>
+    <div class="mobile-bottom"><span>♥ <b id="mobileHp">72</b></span><span>✦ <b id="mobileEnergy">3</b></span><button id="mobileEnd">END TURN ↗</button></div>
+  </main>
+  <div id="modalRoot"></div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="game.js"></script>
+</body>
+</html>
