@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#101114" />
+  <link rel="icon" href="data:," />
+  <title>Blood &amp; Relics — Ashen Hollow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="game-shell">
+    <canvas id="game" aria-label="Ashen Hollow game"></canvas>
+    <div class="vignette"></div>
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">✦</span><div><b>ASHEN HOLLOW</b><small>THE CINDERWOOD · ACT I</small></div></div>
+      <div class="run-clock"><span class="live-dot"></span><span id="timer">00:00</span><small> SURVIVE</small></div>
+      <button class="sound-button" id="soundBtn" aria-label="Toggle sound">♫ <span>SOUND ON</span></button>
+    </header>
+    <section class="hud-left">
+      <div class="hero-card"><div class="hero-avatar">☠</div><div class="hero-info"><b>THE WANDERER</b><span>Level <i id="level">1</i> <em>·</em> <span id="className">Grave Warden</span></span></div></div>
+      <div class="xp-row"><span>EXPERIENCE</span><span id="xpText">0 / 12</span></div>
+      <div class="xp-track"><div id="xpFill"></div></div>
+      <div class="health-row"><span>VITALITY</span><span id="hpText">100 / 100</span></div>
+      <div class="health-track"><div id="hpFill"></div></div>
+    </section>
+    <section class="hud-right">
+      <div class="wave-card"><small>THE HOLLOW stirs</small><b id="waveText">I <span>—</span> WANDERING DEAD</b><div class="wave-progress"><i id="waveFill"></i></div></div>
+      <div class="kill-count"><span class="skull">✦</span><b id="kills">0</b><small>FELLED</small></div>
+    </section>
+    <div class="objective"><span class="objective-icon">⌖</span><span id="objectiveText">THE DEAD ARE DRAWN TO YOU</span></div>
+    <aside class="loot-panel">
+      <div class="panel-title"><span>✦</span> EQUIPPED <small>LOADOUT</small></div>
+      <div class="equipment"><div class="equip-icon weapon">⚔</div><div class="equip-copy"><small>MAIN HAND</small><b id="weaponName">Rustbound Edge</b></div><i class="rarity-dot rare"></i></div>
+      <div class="equipment"><div class="equip-icon armor">◈</div><div class="equip-copy"><small>CHEST ARMOR</small><b id="armorName">Warden's Shroud</b></div><i class="rarity-dot magic"></i></div>
+      <div class="divider"></div>
+      <div class="stat-line"><span>✣ &nbsp;Damage</span><b id="damageStat">12</b></div>
+      <div class="stat-line"><span>⌁ &nbsp;Move speed</span><b id="speedStat">100%</b></div>
+      <div class="stat-line"><span>♧ &nbsp;Pickup radius</span><b>4.5m</b></div>
+      <div class="bag-row"><span>RECENT FINDS</span><span id="bagCount">0 / 6</span></div>
+      <div class="loot-feed" id="lootFeed"><div class="empty-find">The hollow has yet to yield...</div></div>
+    </aside>
+    <div class="controls-hint"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span>MOVE</span><i></i><kbd>SPACE</kbd><span>DASH</span><i></i><kbd>ESC</kbd><span>PAUSE</span></div>
+    <div id="toast" class="toast"></div>
+    <div id="modal" class="modal show">
+      <div class="modal-inner intro-card">
+        <div class="eyebrow"><span></span> A SURVIVOR'S TALE <span></span></div>
+        <h1>Blood <em>&amp;</em><br><span>Relics</span></h1>
+        <p class="subtitle">The dead rise. The lost leave treasures.<br>How long can you hold the line?</p>
+        <div class="intro-rule"></div>
+        <p class="intro-lore">Somewhere in the Cinderwood, an old road runs red.<br>Walk it. Take what the dead were carrying.</p>
+        <button id="startBtn" class="primary-button">ENTER THE HOLLOW <span>→</span></button>
+        <div class="intro-foot">WASD TO MOVE <span>·</span> YOUR WEAPON STRIKES ON ITS OWN</div>
+      </div>
+    </div>
+    <div id="levelModal" class="modal hidden">
+      <div class="modal-inner level-card"><div class="eyebrow"><span></span> A MOMENT OF CLARITY <span></span></div><h2>Choose your path</h2><p>The dead wait. Choose one boon.</p><div id="upgradeChoices" class="upgrade-choices"></div><small class="choose-foot">SELECT A BOON TO CONTINUE</small></div>
+    </div>
+    <div id="pauseModal" class="modal hidden">
+      <div class="modal-inner pause-card"><div class="eyebrow"><span></span> THE HOLLOW HOLDS ITS BREATH <span></span></div><h2>Paused</h2><p>The dead are patient.</p><button class="primary-button" id="resumeBtn">RETURN TO THE HOLLOW <span>→</span></button><button class="text-button" id="restartBtn">ABANDON THIS RUN</button></div>
+    </div>
+    <div id="endModal" class="modal hidden"><div class="modal-inner pause-card"><div class="eyebrow"><span></span> YOUR TALE ENDS HERE <span></span></div><h2 id="endTitle">The hollow claims you</h2><p id="endCopy">You felled 0 dead.</p><div class="end-stats" id="endStats"></div><button class="primary-button" id="againBtn">RISE AGAIN <span>→</span></button></div></div>
+    <div id="touchControls" class="touch-controls"><div class="touch-pad"><button data-dir="up">▲</button><div><button data-dir="left">◀</button><button data-dir="down">▼</button><button data-dir="right">▶</button></div></div><button id="dashBtn" class="dash-button">DASH<br><small>SPACE</small></button></div>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
