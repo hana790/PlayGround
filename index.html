@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#171522">
+  <title>Yume Atelier — Anime Fashion Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Yume Atelier Startseite"><span class="brand-mark">夢</span><span>YUME <i>ATELIER</i></span></a>
+      <div class="season-tag"><span class="live-dot"></span> TOKYO DREAMS <b>·</b> ADULT CAST 21+</div>
+      <div class="top-actions"><button class="icon-btn sound-toggle" aria-label="Sound umschalten">♫</button><button class="icon-btn" id="resetBtn" aria-label="Zurücksetzen">↺</button><div class="profile"><span class="profile-avatar">✦</span><span>STYLIST <small>RANG <b id="rank">01</b></small></span></div></div>
+    </header>
+
+    <main class="layout">
+      <section class="stage-column">
+        <div class="stage-heading"><div><div class="eyebrow"><span class="sparkle">✦</span> DEIN KREATIVSTUDIO</div><h1>Dein Moment.<br><em>Dein Stil.</em></h1></div><div class="chapter"><span>CHAPTER 01</span><b>Neon in the rain</b></div></div>
+        <div class="scene" id="scene">
+          <div class="scene-sun"></div><div class="scene-grid"></div><div class="city city-back"><i></i><i></i><i></i><i></i><i></i></div><div class="city city-front"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="sign sign-one">夢 <small>YUME</small></div><div class="sign sign-two">ラーメン</div>
+          <div class="rain" aria-hidden="true"></div><div class="scene-vignette"></div>
+          <div class="scene-caption"><span class="caption-pin">⌖</span><span><b id="sceneName">SHIBUYA · 23:17</b><small id="sceneMood">Neonregen, leere Straßen</small></span></div>
+          <div class="float-chip"><span class="weather-icon">☂</span><span id="weatherText">REGEN-SPECIAL</span></div>
+          <div class="avatar-wrap" id="avatarWrap" aria-label="Dein Anime-Avatar"><div class="avatar-shadow"></div><svg id="avatar" viewBox="0 0 360 620" role="img" aria-label="Anime-Charakter"></svg></div>
+          <div class="event-toast" id="eventToast"><span class="toast-icon">✧</span><span id="toastText">Outfit gespeichert!</span></div>
+          <div class="stage-controls"><button id="poseBtn" class="round-control" aria-label="Pose wechseln">⟳</button><button id="photoBtn" class="photo-button"><span>◎</span> FOTO-MOMENT</button><button id="flipBtn" class="round-control" aria-label="Ansicht drehen">↔</button></div>
+          <div class="stage-footer"><span><i class="tiny-live"></i> LIVE PREVIEW</span><span>DRAG TO ROTATE <b>↗</b></span></div>
+        </div>
+        <div class="bottom-stats"><div class="stat-label"><span class="eyebrow">DEINE COMMUNITY</span><b>Der Look spricht sich herum.</b></div><div class="stat"><span class="stat-icon heart">♡</span><span><b id="likes">128</b><small>LIKES</small></span></div><div class="stat"><span class="stat-icon">✧</span><span><b id="rep">340</b><small>REPUTATION</small></span></div><div class="stat-score"><span id="score">—</span><small>LETZTES SHOOTING</small></div></div>
+      </section>
+
+      <aside class="creator-panel">
+        <div class="panel-top"><div><div class="eyebrow">CHARACTER DESIGNER <span class="tiny-spark">✦</span></div><h2>Dein Muse</h2></div><button id="randomBtn" class="random-btn" title="Zufälliger Look">⤨ <span>RANDOM</span></button></div>
+        <div class="adult-note"><span>18+</span><span>Alle Figuren sind erwachsene Charaktere (21+).<br>Fashion-Fantasy, immer stilvoll bedeckt.</span></div>
+        <div class="name-row"><label for="nameInput">NAME DEINER MUSE</label><div class="name-input-wrap"><input id="nameInput" maxlength="18" value="Akari" autocomplete="off"><span>✎</span></div></div>
+        <div class="tabs" role="tablist"><button class="tab active" data-tab="look">LOOK</button><button class="tab" data-tab="style">STYLE</button><button class="tab" data-tab="scene">SZENE</button></div>
+        <div class="tab-content" id="tabContent"></div>
+        <div class="panel-bottom"><div class="challenge"><div class="challenge-icon">♢</div><div><small>WEEKLY CHALLENGE</small><b>Midnight in Tokyo</b></div><span class="challenge-arrow">↗</span></div><button class="primary-btn" id="shootBtn"><span>✦</span> LOOK BEWERTEN <i>→</i></button><div class="safety-copy">Ein Fashion-Spiel mit fiktiven erwachsenen Figuren.<br>Keine Nacktheit — nur große Anime-Drama-Energie.</div></div>
+      </aside>
+    </main>
+    <div class="toast" id="mainToast" role="status"></div>
+    <footer><span>YUME ATELIER <b>© 2025</b></span><span>MADE FOR DREAMERS <i>✦</i></span><span>V 1.0.4</span></footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
